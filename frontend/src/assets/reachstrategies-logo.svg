@@ -1,0 +1,10 @@
+<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .mark { fill: #e82d2d; }
+      .brand { fill: #ffffff; font-family: Inter, sans-serif; font-weight: 700; font-size: 28px; }
+    </style>
+  </defs>
+  <path class="mark" d="M10 50 L26 14 L40 14 L24 50 Z M40 14 L56 50 H68 L52 14 Z" />
+  <text class="brand" x="76" y="40">reachstrategies</text>
+</svg>
