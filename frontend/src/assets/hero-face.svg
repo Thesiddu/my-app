@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbfbfb"/>
+      <stop offset="45%" stop-color="#e8e8e8"/>
+      <stop offset="100%" stop-color="#d7d7d7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="20%" r="75%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="480" height="640" rx="48" ry="48" fill="#080405" />
+  <circle cx="340" cy="120" r="95" fill="url(#glow)" opacity="0.35" />
+  <g transform="translate(80 60)" filter="url(#softShadow)">
+    <path d="M228 32C268 36 294 84 292 132c-4 84-76 92-88 156-8 36 6 70 8 110 0 24-12 40-40 40-28 0-40-14-40-40 2-40 18-74 8-110-12-64-84-72-88-156C42 84 68 36 108 32c52-6 104-6 156 0z" fill="url(#headGrad)" />
+    <path d="M132 240c-24 0-4 38 28 38 14 0 28-38-28-38z" fill="#e2e2e2" opacity="0.55" transform="translate(0 20)" />
+    <path d="M204 220c-14 16-44 16-58 0" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.7" />
+    <path d="M100 172c8 4 18 4 26 0" stroke="#b8b8b8" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.65" />
+    <path d="M300 172c-8 4-18 4-26 0" stroke="#b8b8b8" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.65" />
+    <path d="M120 326c18 18 84 18 102 0" stroke="#9d9d9d" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.5" />
+    <path d="M180 356c38 4 58 24 68 40 12 22 10 42 10 62 0 18-4 34-10 50-12 30-40 35-68 35-28 0-56-8-68-35-6-16-10-32-10-50 0-20 2-40 10-62 10-16 30-36 68-40z" fill="#f2f2f2" opacity="0.08" />
+  </g>
+  <circle cx="320" cy="160" r="120" fill="none" stroke="#db3939" stroke-width="4" opacity="0.16" />
+  <circle cx="170" cy="460" r="100" fill="none" stroke="#ff4d4d" stroke-width="3" opacity="0.14" />
+</svg>
