@@ -589,14 +589,19 @@ function App() {
           </div>
 
           <div className="footer-col contact-col">
-            <h4>Contact Us</h4>
-            <p>Hyderabad</p>
-            <p>
-              <a href="https://wa.me/919491305100" target="_blank" rel="noreferrer">WhatsApp: +91 94913 05100</a>
-            </p>
-            <p>
-              <a href="https://instagram.com/reach_strategies" target="_blank" rel="noreferrer">Instagram: @reach_strategies</a>
-            </p>
+            <h4>Contact Reach Strategies</h4>
+            <address style={{ fontStyle: 'normal' }}>
+              <p>Hyderabad, Telangana, India</p>
+              <p>
+                <a href="tel:+919491305100">Call: +91 94913 05100</a>
+              </p>
+              <p>
+                <a href="https://wa.me/919491305100" target="_blank" rel="noreferrer">WhatsApp: +91 94913 05100</a>
+              </p>
+              <p>
+                <a href="https://instagram.com/reach_strategies" target="_blank" rel="noreferrer">Instagram: @reach_strategies</a>
+              </p>
+            </address>
           </div>
         </div>
         <div className="footer-bottom">© 2026 All Rights Reserved. REACH STRATEGIES</div>
