@@ -1,0 +1,17 @@
+{
+  "name": "Reach Strategies | Digital Marketing & Web Solutions Agency",
+  "short_name": "Reach Strategies",
+  "description": "Reach Strategies delivers high-impact digital marketing, AI SEO, Google Ads management, web development, and modern brand strategy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050304",
+  "theme_color": "#e82d2d",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
