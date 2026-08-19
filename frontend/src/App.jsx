@@ -4,6 +4,7 @@ import heroImage from './assets/hero.png'
 import featureFlow from './assets/feature-flow.png'
 import featureInsight from './assets/feature-insight.png'
 import featureLaunch from './assets/feature-launch.png'
+import contactVisual from './assets/contact-visual.jpg'
 import './App.css'
 
 function App() {
@@ -26,52 +27,240 @@ function App() {
     return () => panels.forEach((panel) => observer.unobserve(panel))
   }, [])
 
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  // Close desktop dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
+  const closeMobile = () => {
+    setMobileMenuOpen(false)
+    setMobileServicesOpen(false)
+  }
+
   return (
     <div className="page-shell">
       <header className="topbar">
-        <a href="#home" className="brand-link">
-          <img src={brandSymbol} alt="brand symbol" className="brand-logo" />
+        <a href="#home" className="brand-link" aria-label="Reach Strategies Home" onClick={closeMobile}>
+          <img src={brandSymbol} alt="Reach Strategies Logo" className="brand-logo" />
         </a>
 
-        <nav className="topnav">
-          <div className="topnav-dropdown">
-            <button className="topnav-link dropdown-toggle" type="button">
-              Services
+        {/* Desktop Navigation */}
+        <nav className="topnav desktop-nav">
+          <div
+            className={`topnav-dropdown ${dropdownOpen ? 'open' : ''}`}
+            ref={dropdownRef}
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
+            <button
+              className="topnav-link dropdown-toggle"
+              type="button"
+              aria-expanded={dropdownOpen}
+              onClick={() => setDropdownOpen((prev) => !prev)}
+            >
+              <span>Services</span>
+              <svg className={`dropdown-chevron ${dropdownOpen ? 'rotated' : ''}`} width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
-            <div className="services-menu">
-              <div className="services-column">
-                <span className="services-group-title">Digital Marketing</span>
-                <a href="#google-ads" className="services-item">Google Ads</a>
-                <a href="#lead-generation" className="services-item">Lead Generation</a>
-                <a href="#social-media" className="services-item">Social Media Marketing</a>
-                <a href="#seo" className="services-item">Search Engine Optimization</a>
-                <a href="#local-seo" className="services-item">Local SEO</a>
-                <a href="#ai-seo" className="services-item">AI SEO</a>
-                <a href="#social-media-management" className="services-item">Social Media Management</a>
-                <a href="#content-marketing" className="services-item">Content Marketing</a>
-                <a href="#email-marketing" className="services-item">Email Marketing</a>
-              </div>
-              <div className="services-column">
-                <span className="services-group-title">Web Solutions</span>
-                <a href="#web-designing" className="services-item">Web Designing</a>
-                <a href="#web-development" className="services-item">Web Development</a>
-                <a href="#ecommerce" className="services-item">E-Commerce Website</a>
-                <a href="#cms" className="services-item">Custom CMS Websites</a>
+
+            <div className={`services-menu ${dropdownOpen ? 'visible' : ''}`}>
+              <div className="services-grid">
+                <div className="services-column">
+                  <div className="services-group-header">
+                    <span className="services-icon-dot"></span>
+                    <span className="services-group-title">Digital Marketing</span>
+                  </div>
+                  <div className="services-list">
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Google Ads</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Lead Generation</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Social Media Marketing</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Search Engine Optimization</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Local SEO</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">AI SEO</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Social Media Management</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Content Marketing</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Email Marketing</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="services-column">
+                  <div className="services-group-header">
+                    <span className="services-icon-dot"></span>
+                    <span className="services-group-title">Web Solutions</span>
+                  </div>
+                  <div className="services-list">
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Web Designing</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Web Development</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">E-Commerce Website</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                    <a href="#services" className="services-item" onClick={() => setDropdownOpen(false)}>
+                      <span className="item-text">Custom CMS Websites</span>
+                      <span className="item-arrow">→</span>
+                    </a>
+                  </div>
+
+                  <div className="services-cta-box">
+                    <p className="services-cta-title">Need a tailored growth strategy?</p>
+                    <a href="#contact" className="services-cta-btn" onClick={() => setDropdownOpen(false)}>
+                      Request a Proposal →
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <a href="#about" className="topnav-link active">About</a>
+
+          <a href="#about" className="topnav-link">About</a>
+          <a href="#work" className="topnav-link">Case Studies</a>
+          <a href="#faq" className="topnav-link">FAQ</a>
           <a href="#contact" className="topnav-link">Contact</a>
+          <a href="#contact" className="topnav-cta-btn">Book a Call</a>
         </nav>
+
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          className={`mobile-menu-btn ${mobileMenuOpen ? 'open' : ''}`}
+          aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+        >
+          <span className="hamburger-line line-1"></span>
+          <span className="hamburger-line line-2"></span>
+          <span className="hamburger-line line-3"></span>
+        </button>
       </header>
+
+      {/* Mobile Navigation Drawer */}
+      <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'active' : ''}`}>
+        <div className="mobile-nav-content">
+          <div className="mobile-nav-links">
+            <div className="mobile-accordion">
+              <button
+                type="button"
+                className={`mobile-accordion-toggle ${mobileServicesOpen ? 'expanded' : ''}`}
+                onClick={() => setMobileServicesOpen((prev) => !prev)}
+              >
+                <span>Services</span>
+                <svg className="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+
+              <div className={`mobile-accordion-body ${mobileServicesOpen ? 'open' : ''}`}>
+                <div className="mobile-services-group">
+                  <span className="mobile-group-title">Digital Marketing</span>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Google Ads</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Lead Generation</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Social Media Marketing</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Search Engine Optimization</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Local SEO</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>AI SEO</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Social Media Management</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Content Marketing</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Email Marketing</a>
+                </div>
+
+                <div className="mobile-services-group">
+                  <span className="mobile-group-title">Web Solutions</span>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Web Designing</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Web Development</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>E-Commerce Website</a>
+                  <a href="#services" className="mobile-sublink" onClick={closeMobile}>Custom CMS Websites</a>
+                </div>
+              </div>
+            </div>
+
+            <a href="#about" className="mobile-nav-link" onClick={closeMobile}>About Us</a>
+            <a href="#work" className="mobile-nav-link" onClick={closeMobile}>Case Studies</a>
+            <a href="#team" className="mobile-nav-link" onClick={closeMobile}>Our Team</a>
+            <a href="#faq" className="mobile-nav-link" onClick={closeMobile}>FAQ</a>
+            <a href="#contact" className="mobile-nav-link" onClick={closeMobile}>Contact Us</a>
+          </div>
+
+          <div className="mobile-nav-footer">
+            <a href="#contact" className="button primary mobile-cta" onClick={closeMobile}>
+              Book a Call
+              <span className="button-arrow">→</span>
+            </a>
+
+            <div className="mobile-social-row">
+              <a href="https://wa.me/919491305100" target="_blank" rel="noreferrer" className="mobile-social-link whatsapp">
+                WhatsApp
+              </a>
+              <a href="https://instagram.com/reach_strategies" target="_blank" rel="noreferrer" className="mobile-social-link instagram">
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <main className="site-shell">
         <section id="home" className="hero panel scroll-panel">
           <div className="hero-copy">
-            <span className="eyebrow">Your trusted marketing partner</span>
-            <h1>Efficient strategy for modern brands</h1>
+            <span className="eyebrow">Reach Strategies — Your Trusted Growth Partner</span>
+            <h1>Efficient Strategy for Modern Brands</h1>
             <p>
-              Reachstrategies delivers bold digital growth with a modern brand
+              Reach Strategies delivers bold digital growth with a modern brand
               experience, clearer insights, and launch-ready marketing assets.
             </p>
 
@@ -85,7 +274,7 @@ function App() {
 
           <div className="hero-visual">
             <div className="hero-image-frame">
-              <img src={heroImage} alt="Hero" className="hero-image" />
+              <img src={heroImage} alt="Reach Strategies Digital Marketing Agency" className="hero-image" />
               <div className="hero-image-glow" />
               <div className="hero-image-dots" />
             </div>
@@ -104,10 +293,6 @@ function App() {
                 <img src={featureFlow} alt="Faster workflows" />
               </div>
               <h3>Faster workflows</h3>
-              <p>
-                Streamlined campaign delivery and high-velocity creative execution
-                so your business moves with momentum.
-              </p>
             </article>
 
             <article className="feature-card">
@@ -115,10 +300,6 @@ function App() {
                 <img src={featureInsight} alt="Clearer insights" />
               </div>
               <h3>Clearer insights</h3>
-              <p>
-                Data-led storytelling, measurement frameworks, and reporting that
-                show what is working and why.
-              </p>
             </article>
 
             <article className="feature-card">
@@ -126,10 +307,6 @@ function App() {
                 <img src={featureLaunch} alt="Launch-ready assets" />
               </div>
               <h3>Launch-ready assets</h3>
-              <p>
-                Modern brand systems, landing pages, and campaign assets designed
-                to launch quickly and perform consistently.
-              </p>
             </article>
           </div>
         </section>
@@ -279,36 +456,100 @@ function App() {
 
         <section id="contact" className="contact panel scroll-panel">
           <div className="section-heading">
-            <span>Contact</span>
+            <span>Contact Us</span>
             <h2>Share your details and the service you need</h2>
           </div>
-          <form className="contact-form">
-            <label>
-              Full name
-              <input type="text" name="name" placeholder="Your name" required />
-            </label>
-            <label>
-              Email address
-              <input type="email" name="email" placeholder="you@example.com" required />
-            </label>
-            <div className="field-row">
-              <label className="phone-field">
-                Phone number
-                <div className="phone-input-wrap">
-                  <CountryCodeSelect name="country" defaultValue="+91" />
-                  <input type="tel" name="phone" placeholder="98765 43210" required />
-                </div>
-              </label>
 
-              <label className="service-field">
-                Service needed
-                <ServiceSelect name="service" required />
-              </label>
+          <div className="contact-grid">
+            <div className="contact-visual-card">
+              <div className="contact-image-wrapper">
+                <img src={contactVisual} alt="Reach Strategies Growth Consultation" className="contact-visual-img" />
+                <div className="contact-image-overlay" />
+              </div>
+
+              <div className="contact-info-panel">
+                <div className="contact-badge">
+                  <span className="live-pulse" />
+                  Direct Consultation
+                </div>
+                <h3>Ready to scale your brand?</h3>
+                <p>
+                  Schedule a complimentary growth strategy session with our digital marketing and web specialists.
+                </p>
+
+                <div className="contact-quick-links">
+                  <a href="https://wa.me/919491305100" target="_blank" rel="noreferrer" className="quick-contact-pill whatsapp">
+                    <svg className="pill-icon-svg" width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.52 3.48A11.88 11.88 0 0 0 12 0C5.373 0 .001 5.373.001 12a11.84 11.84 0 0 0 1.61 6.04L0 24l6.16-1.59A11.88 11.88 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.19-1.24-6.18-3.48-8.52z" fill="#25D366"/>
+                      <path d="M17.39 14.62c-.36-.18-2.12-1.05-2.45-1.17-.33-.12-.57-.18-.81.18s-.93 1.17-1.14 1.41c-.21.24-.42.27-.78.09-.36-.18-1.51-.56-2.87-1.77-1.06-.95-1.77-2.12-1.98-2.48-.21-.36-.02-.55.16-.73.17-.17.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24 0-.45-.06-.63-.06-.18-.81-1.96-1.11-2.68-.29-.7-.58-.6-.81-.6-.21 0-.45 0-.69 0-.24 0-.63.09-.96.45-.33.36-1.25 1.22-1.25 2.96 0 1.74 1.28 3.42 1.45 3.66.18.24 2.51 3.83 6.08 5.37 3.56 1.54 3.56 1.03 4.2.96.64-.06 2.06-.84 2.35-1.66.29-.83.29-1.54.2-1.69-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
+                    </svg>
+                    <span>Chat with us on WhatsApp</span>
+                  </a>
+                  <a href="https://instagram.com/reach_strategies" target="_blank" rel="noreferrer" className="quick-contact-pill instagram">
+                    <svg className="pill-icon-svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5"/>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" strokeWidth="2.4"/>
+                    </svg>
+                    <span>Follow @reach_strategies</span>
+                  </a>
+                </div>
+
+                <div className="contact-meta-row">
+                  <div className="meta-item">
+                    <span className="meta-label">Response Time</span>
+                    <span className="meta-val">
+                      <svg className="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="rgba(255, 184, 0, 0.25)" stroke="#ffb800"/>
+                      </svg>
+                      &lt; 2 Hours
+                    </span>
+                  </div>
+                  <div className="meta-item">
+                    <span className="meta-label">Location</span>
+                    <span className="meta-val">
+                      <svg className="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="rgba(232, 45, 45, 0.25)" stroke="#ff4d4d"/>
+                        <circle cx="12" cy="10" r="3" fill="#ff4d4d"/>
+                      </svg>
+                      Hyderabad, India
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button type="submit" className="button primary contact-submit">
-              Submit request
-            </button>
-          </form>
+
+            <div className="contact-form-container">
+              <form className="contact-form">
+                <label>
+                  Full name
+                  <input type="text" name="name" placeholder="Your name" required />
+                </label>
+                <label>
+                  Email address
+                  <input type="email" name="email" placeholder="you@example.com" required />
+                </label>
+                <div className="field-row">
+                  <label className="phone-field">
+                    Phone number
+                    <div className="phone-input-wrap">
+                      <CountryCodeSelect name="country" defaultValue="+91" />
+                      <input type="tel" name="phone" placeholder="98765 43210" required />
+                    </div>
+                  </label>
+
+                  <label className="service-field">
+                    Service needed
+                    <ServiceSelect name="service" required />
+                  </label>
+                </div>
+                <button type="submit" className="button primary contact-submit">
+                  Submit request
+                  <span className="button-arrow">→</span>
+                </button>
+              </form>
+            </div>
+          </div>
         </section>
       </main>
 
