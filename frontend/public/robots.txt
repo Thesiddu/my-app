@@ -1,4 +1,36 @@
+# Reach Strategies - Production Robots.txt
+# Domain: https://reachstrategies.in/
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
 
+# Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI Answer Engine Crawlers (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Canonical Dynamic Sitemap Reference
 Sitemap: https://reachstrategies.in/sitemap.xml
